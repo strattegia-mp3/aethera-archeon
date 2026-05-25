@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+:root {
+  /* ─── Light Mode (Mármore e Ouro) ─── */
+  --color-background: #f4f3ef;
+  --color-foreground: #1c1d1a;
+  --color-surface: #ffffff;
+  --color-border: #e2dfd8;
+
+  --color-gold: #b8975e;
+  --color-gold-light: #d4b882;
+  --color-gold-pale: #f2eadc;
+
+  --shadow-card: 0 8px 32px rgba(28, 29, 26, 0.05);
+  --shadow-card-hover: 0 16px 64px rgba(28, 29, 26, 0.1);
+  --map-placeholder-bg: linear-gradient(135deg, #e8e6df 0%, #f4f3ef 100%);
+}
+
+[data-theme="dark"] {
+  /* ─── Dark Mode (Obsidiana e Bronze) ─── */
+  --color-background: #0d0e12;
+  --color-foreground: #e4e3df;
+  --color-surface: #15161c;
+  --color-border: #23252d;
+
+  --color-gold: #c9a84c;
+  --color-gold-light: #e0c57c;
+  --color-gold-pale: #2a2517;
+
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 16px 64px rgba(0, 0, 0, 0.6);
+  --map-placeholder-bg: linear-gradient(135deg, #111217 0%, #0d0e12 100%);
+}
+
+@theme {
+  /* ─── Typography ─── */
+  --font-display: var(--font-cinzel);
+  --font-body: var(--font-montserrat);
+
+  /* ─── Spacing ─── */
+  --spacing-section: 10rem;
+  --spacing-section-sm: 6rem;
+
+  /* ─── Border Radius ─── */
+  --radius-card: 0px;
+  --radius-btn: 2px;
+}
+
+/* ─── Base Reset & Globals ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-background);
+}
+
+/* ─── Utility Classes ─── */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+.font-body {
+  font-family: var(--font-body), "Helvetica Neue", sans-serif;
+}
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Adicionado mapeamento de cor com fallback tailwind */
+.bg-background {
+  background-color: var(--color-background);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.text-foreground {
+  color: var(--color-foreground);
+}
+.border-surface {
+  border-color: var(--color-border);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold) 0%,
+    var(--color-gold-light) 60%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Responsive Container ─── */
+.container-nexus {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (min-width: 768px) {
+  .container-nexus {
+    /* Tablet: Margens substanciais para afastar das bordas */
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-nexus {
+    /* Desktop: Margens largas dignas de revistas de arquitetura */
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+/* ─── Section Base ─── */
+.section-padding {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: var(--spacing-section-sm);
+    padding-bottom: var(--spacing-section-sm);
+  }
+}
+
+/* ─── Gold Divider (Estética Clássica) ─── */
+.divider-gold {
+  width: 4rem;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 1.5rem 0;
+}
+
+/* ─── Card Base ─── */
+.card-base {
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+.card-base:hover {
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+/* ─── WhatsApp FAB Pulse ─── */
+@keyframes fab-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+.fab-whatsapp {
+  animation: fab-pulse 2.5s ease-in-out infinite;
+}
+
+/* ─── Map Placeholder ─── */
+.map-placeholder {
+  background: var(--map-placeholder-bg);
+  border: 1px solid var(--color-border);
+}
+
+/* ─── Header Backdrop ─── */
+.header-backdrop {
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  background: color-mix(in srgb, var(--color-background) 85%, transparent);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Geometric Hero Pattern (Grid Arquitetônico Subtil) ─── */
+.hero-pattern {
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  background-position: center center;
+  opacity: 0.2;
+}
